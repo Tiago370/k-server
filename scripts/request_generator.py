@@ -1,5 +1,5 @@
 import random
-nRequests = 100
+nRequests = 1000000
 aux = 0
 print(nRequests)
 for i in range(0, nRequests):

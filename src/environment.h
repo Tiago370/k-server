@@ -1,4 +1,5 @@
-#pragma once
+#ifndef ENVIRONMENT_H
+#define ENVIRONMENT_H
 #include <vector>
 #include <string>
 using namespace std;
@@ -28,3 +29,4 @@ private:
 	vector<unsigned int> historico;
 	void copy_k_local();
 };
+#endif

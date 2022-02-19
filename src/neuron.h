@@ -1,3 +1,5 @@
+#ifndef NEURON_H
+#define NEURON_H
 #include <vector>
 #include <string>
 #include <stdlib.h>
@@ -29,3 +31,4 @@ private:
 	double ReLU(double x);
 	void summingJunction(vector<double>* inputs);
 };
+#endif

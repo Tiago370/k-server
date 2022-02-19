@@ -36,7 +36,13 @@ Net::Net(int nInputs, int nHiddenLayers, int nHiddenNeurons, int nOutput){
 		layers[nHiddenLayers].push_back(nHiddenNeurons);
 	}
 }
-
+Net::Net(){
+	this->nInputs = 0;
+	this->nHiddenLayers = 0;
+	this->nHiddenNeurons = 0;
+	this->nOutput = 0;
+	this->fitness = 0;
+}
 Net::~Net(){}
 void Net::openNet(char* arquiv){
 	int nInputs;

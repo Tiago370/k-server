@@ -1,3 +1,5 @@
+#ifndef NET_H
+#define NET_H
 #include "neuron.h"
 #include <vector>
 #include <string>
@@ -16,6 +18,7 @@ public:
 	vector<vector<Neuron>> layers;
 
 	Net(int nInputs, int nHiddenLayers, int nHiddenNeurons, int nOutput);
+	Net();
 
 	~Net();
 
@@ -41,3 +44,4 @@ private:
 	vector<vector<Neuron>>* getLayers();
 	void imprimeCamada(unsigned int i);
 };
+#endif

@@ -1,4 +1,3 @@
-#pragma once
 #include <string>
 #include "trainer.h"
 #include "greeder.h"
@@ -20,7 +19,7 @@ int main(int argc, char *argv[]){
         trainer.random();
     }
     else if(algoritmo == "training"){
-        trainer.randomMutation(2, 2, 2, 2);
+        trainer.randomMutation(2, 2, 100, 1000000);
         cout << "ok" << endl;
     }
     else{

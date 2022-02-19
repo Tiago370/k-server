@@ -1,3 +1,5 @@
+#ifndef TRAINER_H
+#define TRAINER_H
 #include <vector>
 #include <string>
 #include "environment.h"
@@ -5,7 +7,7 @@
 using namespace std;
 class Trainer {
     public:
-        Trainer(string mapa, string requests);
+        Trainer(string file_map, string file_requests);
         ~Trainer();
         void printRequests();
         void randomMutation(unsigned int nHiddenLayers, unsigned int nHiddenNeurons, unsigned int nPopulation, unsigned int nGenerations);
@@ -16,4 +18,7 @@ class Trainer {
         vector<unsigned int> requests;
         Net champion;
         void readRequests(string requests);
+        void play(Net *net);
    };
+bool squareCompareByFitness(Net &a, Net &b);
+#endif

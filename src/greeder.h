@@ -1,3 +1,5 @@
+#ifndef GREEDER_H
+#define GREEDER_H
 #include<vector>
 #include<string>
 #include "environment.h"
@@ -15,3 +17,4 @@ class Greeder {
         Environment *environment;
         unsigned int closest_server(unsigned int node);
 };
+#endif

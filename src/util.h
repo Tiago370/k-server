@@ -1,3 +1,5 @@
+#ifndef UTIL_H
+#define UTIL_H
 #include <vector>
 #include <string>
 
@@ -11,3 +13,4 @@ int retira(vector<unsigned int> &v, unsigned int i);
 void insereNoComeco(vector<unsigned int> &v, int value);
 void empacota(vector<unsigned int> &v, int pos, int value);
 void print(vector<unsigned int>* v);
+#endif
