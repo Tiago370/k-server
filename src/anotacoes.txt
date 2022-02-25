@@ -1,0 +1,20 @@
+Usei grafo de 18 nós e duas instâncias de 100000 requisições
+Usando as requisições de treinamento.
+    Melhor Fitness:     223173982 (óbviamente ganhou)
+    Algoritmo Greedy:   223536383
+
+Usando a requisições de teste.
+    Algoritmo Greedy:   225287372 
+    Rede Treinada:      224718582 (ganhou)
+
+Tarefas:
+    gerar outras instâncias de requisições que contenham algum padrão.
+    gerar um outro mapa com três instâncias de requisições.
+        treinamento: 2 com padrão e 1 aleatório.
+        teste:       2 com padrão e 1 aleatório.
+    tamanho do mapa:
+        > 18
+        > 3 servidores
+    
+
+    tentar implementar a outra versão do preblema.

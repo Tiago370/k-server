@@ -12,6 +12,8 @@ class Trainer {
         void printRequests();
         void randomMutation(unsigned int nHiddenLayers, unsigned int nHiddenNeurons, unsigned int nPopulation, unsigned int nGenerations);
         void random();
+        void run();
+        void setNet(char* file_net);
     private:
         Environment *environment;
         unsigned int nRequests;
@@ -19,6 +21,7 @@ class Trainer {
         Net champion;
         void readRequests(string requests);
         void play(Net *net);
+        unsigned int lastResult;
    };
 bool squareCompareByFitness(Net &a, Net &b);
 #endif

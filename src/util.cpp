@@ -1,5 +1,6 @@
 #include "util.h"
 #include <iostream>
+#include <cstring>
 string vectorToString(vector<int>* v){
     string out = "[";
     for(unsigned int i = 0; i < v->size(); i++){
@@ -49,4 +50,8 @@ void empacota(vector<unsigned int> &v, int pos, int value){
         v[i] = v[i+1];
         v[i+1] = aux;
     }
+}
+void stringToChar(string s, char* c){
+    c = new char[s.length()+1];
+    strcpy(c, s.c_str());
 }

@@ -149,7 +149,19 @@ void Trainer::play(Net* net){
         }else{
             net->setFitness(__DBL_MAX__);        
         }
+        lastResult = custo_total;
     }
+}
+void Trainer::run(){
+    cout << "Rodando com a rede treinada..." << endl;
+    play(&champion);
+    cout << "Custo acumulado: " << lastResult << endl;
+}
+void Trainer::setNet(char* file_net){
+    cout << "Carregando rede..." << endl;
+    champion.openNet(file_net);
+    cout << "Rede carregada com sucesso" << endl;
+
 }
 bool squareCompareByFitness(Net &a, Net &b){
     return a.getFitness() < b.getFitness();
