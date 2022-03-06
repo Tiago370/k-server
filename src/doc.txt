@@ -1,0 +1,21 @@
+Criar um lote:
+    1) Rodar "python3 scripts/cli.py -newBatch"
+    2) Alterar os parâmetros no arquivo "dados/instancias/lote<id-lote>/meta-dados.txt"
+
+Gerar o mapa de um lote:
+    1) Rodar "python3 scripts/cli.py -generateMap <id-lote>"
+
+Gerar as instâncias de um lote:
+    1) Rodar "python3 scripts/cli.py -generateInstances <id-lote>"
+
+Treinar a rede de um lote:
+    1) Rodar "python3 scripts/cli.py -train 1 -no-print"
+
+Imprimir a linha de comando para treinar um lote:
+    1) Rodar "python3 scripts/cli.py -train 1 -print"
+
+Deletar um lote:
+    1) Rodar "python3 scripts/cli.py -deleteBatch <id-lote>"
+
+Listar os lotes disponíveis:
+    1) Rodar "python3 scripts/cli.py -listBatches"

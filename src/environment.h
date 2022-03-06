@@ -19,11 +19,12 @@ public:
 	unsigned getCusto(unsigned int node1, unsigned int node2);
 	unsigned int closest_server(unsigned int node);
 	unsigned int getKServes();
+	void printMapa();
 private:
 	unsigned int nNodes;
 	unsigned int kServes;
     unsigned int custo_acumulado;
-	vector<vector<unsigned int>> custo;
+	vector<vector<double>> custo;
     vector<unsigned int> k_local_fixo;
 	vector<unsigned int> k_local;
 	vector<unsigned int> historico;

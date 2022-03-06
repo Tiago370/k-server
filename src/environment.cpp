@@ -8,10 +8,9 @@ Environment::Environment(string arquivo){
         cout << "Erro ao abrir arquivo" << endl;
         exit(1);
     }
-    
+    cout << "Abrindo arquivo: " << arquivo << endl;
     file >> nNodes;
     file >> kServes;
-
     k_local_fixo.resize(kServes);
     for(unsigned int i = 0; i < kServes; i++){
         file >> k_local_fixo[i];
@@ -24,7 +23,9 @@ Environment::Environment(string arquivo){
     
     for(unsigned int i = 0; i < nNodes; i++){
         for(unsigned int j = 0; j < nNodes; j++){
-            file >> custo[i][j];
+            double custo_aux;
+            file >> custo_aux;
+            custo[i][j] = custo_aux;
         }
     }
 
@@ -91,4 +92,16 @@ unsigned int Environment::closest_server(unsigned int node){
 }
 unsigned int Environment::getKServes(){
     return kServes;
+}
+void Environment::printMapa(){
+    cout << nNodes << " " << kServes << endl;
+    for(unsigned int i = 0; i < kServes; i++){
+        cout << k_local[i] << endl;
+    }
+    for(unsigned int i = 0; i < nNodes; i++){
+        for(unsigned int j = 0; j < nNodes; j++){
+            cout << custo[i][j] << " ";
+        }
+        cout << endl;
+    }
 }

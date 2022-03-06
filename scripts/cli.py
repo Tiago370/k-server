@@ -1,7 +1,31 @@
 #checar estrutura de pastas
 import structurer
+import sys
 stt = structurer.Structurer()
 stt.check()
+
+if len(sys.argv) >= 2:
+    command = sys.argv[1]
+    if(command == "-newBatch"):
+        stt.newBatch()
+    elif(command == "-generateMap"):
+        stt.readMetaData(sys.argv[2])
+        stt.generateMap(sys.argv[2])
+    elif(command == "-generateInstances"):
+        stt.readMetaData(sys.argv[2])
+        stt.generateInstances(sys.argv[2])
+    elif(command == "-train"):
+        stt.readMetaData(sys.argv[2])
+        if sys.argv[3] == "-print":
+            stt.train(sys.argv[2], True)
+        else:
+            stt.train(sys.argv[2], False)
+    elif(command == "-deleteBatch"):
+        stt.deleteBatch(sys.argv[2])
+    elif(command == "-listBatches"):
+        stt.listBatches()
+    else:
+        pass
 
 
 

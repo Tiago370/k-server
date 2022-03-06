@@ -1,0 +1,10 @@
+nos = 10
+servidores = 2
+requisicoes = 100
+instancias = 3
+padrao_de_distribuicao = (100, 100)
+geracoes = 10000
+individuos = 100
+camadas_escondidas = 2
+neuronios_escondidos = 2
+geracoes_sem_melhora = 200
