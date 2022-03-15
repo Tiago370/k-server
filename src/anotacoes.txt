@@ -18,3 +18,12 @@ Tarefas:
     
 
     tentar implementar a outra versão do preblema.
+
+    10/03/2022
+    -> Parametrizar as configurações abaixo. 
+    -> Ordenar as distâncias.
+    -> Normalizar as distâncias (no código) # dividir pelo maior.
+    -> A rede não deve tomar decisão quando já estiver um servidor no nó da requisição.
+    -> Inserir uma rede neural que simule o comportamento do greedy.
+
+    > Lembrar "algoritmo primal e dual"

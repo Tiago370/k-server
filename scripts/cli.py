@@ -24,6 +24,12 @@ if len(sys.argv) >= 2:
         stt.deleteBatch(sys.argv[2])
     elif(command == "-listBatches"):
         stt.listBatches()
+    elif(command == "-runNet"):
+        stt.readMetaData(sys.argv[2])
+        stt.runnet(sys.argv[2])
+    elif(command == "-runGreedy"):
+        stt.readMetaData(sys.argv[2])
+        stt.runGreedy(sys.argv[2])
     else:
         pass
 

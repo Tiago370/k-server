@@ -6,7 +6,7 @@
 class Greeder {
     public:
 
-        Greeder(string file_map, string file_requests);
+        Greeder(string file_map, string file_requests, unsigned int idLote);
         ~Greeder();
         void printRequests();
         void readRequests(string file_requests);
@@ -16,5 +16,6 @@ class Greeder {
         vector<unsigned int> requests;
         Environment *environment;
         unsigned int closest_server(unsigned int node);
+        unsigned int idLote;
 };
 #endif

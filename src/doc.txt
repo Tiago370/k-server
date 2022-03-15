@@ -19,3 +19,6 @@ Deletar um lote:
 
 Listar os lotes disponíveis:
     1) Rodar "python3 scripts/cli.py -listBatches"
+
+Rodar a rede para as instancias de teste:
+    1) Rodar "python3 scripts/cli.py -runNet <id-lote>"

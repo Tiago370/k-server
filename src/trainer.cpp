@@ -4,6 +4,8 @@
 #include <iostream>
 #include <climits>
 #include <algorithm>
+#include <ios>
+#include <fstream>
 #include "trainer.h"
 #include "net.h"
 #include "environment.h"
@@ -35,7 +37,7 @@ void Trainer::randomMutation(unsigned int nHiddenLayers, unsigned int nHiddenNeu
 	}
     //treinando a população
 	unsigned int generation_number = 0;
-    long long fitness = LONG_LONG_MAX;
+    long double fitness = LONG_LONG_MAX;
     unsigned int nElite = nPopulation*0.05;
     unsigned int stop = 0;
 
@@ -88,7 +90,7 @@ void Trainer::randomMutation(unsigned int nHiddenLayers, unsigned int nHiddenNeu
         stop++;
         //cerr << "aqui fim" << endl;
 	}
-    string rede_path = "dados/saida/lote" + to_string(loteId) + "/rede-" + to_string(nHiddenLayers) + "x" + to_string(nHiddenNeurons) + ".txt";
+    string rede_path = "dados/saida/lote" + to_string(loteId) + "/rede.txt";
     cout << rede_path << endl;
     champion.saveNet((char*)rede_path.c_str());
 }
@@ -143,7 +145,7 @@ void Trainer::play(Net* net, unsigned int instanceId){
         //Atualizando o fitness
         double custo_total = environment->getCustoAcumulado();
         if(custo_total > 0.00001){
-            unsigned int fitness_da_rede = net->getFitness();
+            double fitness_da_rede = net->getFitness();
             net->setFitness(fitness_da_rede + custo_total);
         }else{
             net->setFitness(__DBL_MAX__);        
@@ -151,11 +153,17 @@ void Trainer::play(Net* net, unsigned int instanceId){
         lastResult = custo_total;
     }
 }
-void Trainer::run(){
+void Trainer::run(unsigned int idLote){
     cout << "Rodando com a rede treinada..." << endl;
     lastResult = 0;
     play(&champion, 1);
     cout << "Custo acumulado: " << champion.getFitness() << endl;
+    //arquivo da tabela de resultados da rede
+    string arquivo = "dados/saida/lote" + to_string(idLote) + "/resultados-rede.csv";
+    ofstream file(arquivo.c_str(), std::ios_base::app | std::ios_base::out);
+    file << idLote << ", " << champion.getFitness() << endl;
+
+
 }
 void Trainer::setNet(char* file_net){
     cout << "Carregando rede..." << endl;

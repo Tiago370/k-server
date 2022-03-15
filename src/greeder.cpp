@@ -4,9 +4,10 @@
 #include<fstream>
 #include "greeder.h"
 using namespace std;
-Greeder::Greeder(string file_map, string file_requests){
+Greeder::Greeder(string file_map, string file_requests, unsigned int idLote){
     readRequests(file_requests);
     environment = new Environment(file_map);
+    this->idLote = idLote;
 }
 Greeder::~Greeder(){   }
 void Greeder::printRequests(){
@@ -24,6 +25,12 @@ void Greeder::solve(){
     }
     cout << "Algoritmo Greedy" << endl;
     cout << "\tCusto acumulado: " << environment->getCustoAcumulado() << endl;
+    //arquivo da tabela de resultados do algoritmo Greedy
+    string arquivo = "dados/saida/lote" + to_string(this->idLote) + "/resultados-greedy.csv";
+    ofstream file(arquivo.c_str(), std::ios_base::app | std::ios_base::out);
+    file << idLote << ", " << environment->getCustoAcumulado() << endl;
+
+
 }
 unsigned int Greeder::closest_server(unsigned int node){
     unsigned int menor_distancia = INT_MAX;

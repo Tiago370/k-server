@@ -15,15 +15,15 @@ public:
 	unsigned int get_nNodes();
 	void reset();
 	vector<unsigned int> getKLocal();
-	unsigned int getCustoAcumulado();
-	unsigned getCusto(unsigned int node1, unsigned int node2);
+	double getCustoAcumulado();
+	double getCusto(unsigned int node1, unsigned int node2);
 	unsigned int closest_server(unsigned int node);
 	unsigned int getKServes();
 	void printMapa();
 private:
 	unsigned int nNodes;
 	unsigned int kServes;
-    unsigned int custo_acumulado;
+    double custo_acumulado;
 	vector<vector<double>> custo;
     vector<unsigned int> k_local_fixo;
 	vector<unsigned int> k_local;

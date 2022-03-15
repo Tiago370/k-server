@@ -1,5 +1,7 @@
 import os
 import random
+import matplotlib.pyplot as plt
+
 class Structurer:
     def __init__(self):
         self.meta_dados = {}
@@ -102,13 +104,16 @@ class Structurer:
     def generateInstances(self, idLote):
         nInstancias = self.meta_dados["instancias"]
         nRequisicoes = self.meta_dados["requisicoes"]
+        nNos = self.meta_dados["nos"]
+        padraoDeDistribuicao = self.meta_dados["padrao_de_distribuicao"]
         #gerar as requisições de treinamento
         for i in range(1, nInstancias + 1):
             pathBatch = "dados/instancias/lote" + str(idLote)
             arquivo = open(pathBatch + "/req-trn/req" + str(i) + ".txt", "w")
             arquivo.write(str(nRequisicoes) + "\n")
-            for j in range(nRequisicoes):
-                arquivo.write(str(random.randint(0, self.meta_dados["nos"] - 1)) + "\n")
+            requisicoes = self.generateRequisitions(padraoDeDistribuicao[0], padraoDeDistribuicao[1], nNos, nRequisicoes)
+            for i in range(nRequisicoes):
+                arquivo.write(str(requisicoes[i]) + "\n")
             arquivo.close()
         
         #gerar as requisições de teste
@@ -116,8 +121,9 @@ class Structurer:
             pathBatch = "dados/instancias/lote" + str(idLote)
             arquivo = open(pathBatch + "/req-tst/req" + str(i) + ".txt", "w")
             arquivo.write(str(nRequisicoes) + "\n")
-            for j in range(nRequisicoes):
-                arquivo.write(str(random.randint(0, self.meta_dados["nos"] - 1)) + "\n")
+            requisicoes = self.generateRequisitions(padraoDeDistribuicao[0], padraoDeDistribuicao[1], nNos, nRequisicoes)
+            for i in range(nRequisicoes):
+                arquivo.write(str(requisicoes[i]) + "\n")
             arquivo.close()
     
     def train(self, idLote, toPrint):
@@ -159,3 +165,72 @@ class Structurer:
         print("Lista de lotes:")
         for i in range(len(lista)):
             print(str(i+1) + " - " + lista[i])
+
+    def generateRequisitions(self, a, b, n, r):
+        if a ==  100 and b == 100:
+            requisitions = []
+            for i in range(r):
+                requisitions.append(random.randint(0, n - 1))
+            return requisitions
+        #obter o número de nós previlegiados
+        nPrivileged = int((a/100) * n)
+        #selecionar os nós previlegiados
+        privilegedNodes = random.sample(range(0, n), nPrivileged)
+        print("Nós previlegiados: ", privilegedNodes)
+        #intervalo de roleta enviesada
+        cotasTotal = n*10
+        cotasPrivileged = int((cotasTotal*b/100)/nPrivileged)
+        cotasNonPrivileged = int((cotasTotal*(100-b)/100)/(n-nPrivileged))
+        cotas = []
+        for i in range(nPrivileged):
+            for j in range(0, cotasPrivileged):
+                cotas.append(privilegedNodes[i])
+        for i in range(0, n):
+            if i not in privilegedNodes:
+                for j in range(0, cotasNonPrivileged):
+                    cotas.append(i)
+        
+        #gerar as requisições
+        requisitions = []
+        for i in range(0, r):
+            requisitions.append(random.choice(cotas))
+        return requisitions
+    
+    def runnet(self, idLote):        
+        #./build/k-server -run dados/instancias/lote1/mapa.txt dados/instancias/lote1/req-tst/req1.txt dados/saida/lote1/rede-2x2.txt
+        # Obter o caminho do mapa
+        pathMap = "dados/instancias/lote" + str(idLote) + "/mapa.txt"
+        # Obter o caminho das requisições de teste
+        pathRequisitions = "dados/instancias/lote" + str(idLote) + "/req-tst"
+        # Obter o caminho da rede
+        pathNetwork = "dados/saida/lote" + str(idLote) + "/rede.txt"
+        # Obter o número de instâncias
+        nInstances = self.meta_dados["instancias"]
+        # Obter o caminho do arquivo de resultados
+        pathResults = "dados/saida/lote" + str(idLote) + "/resultados-rede.csv"
+        # Apagar o conteúdo do arquivo de resultados
+        os.system("rm " + pathResults)
+        # Rodar todas as instâncias
+        print("0i")
+        for i in range(1, nInstances + 1):
+            # Obter o caminho da requisição de teste
+            pathRequisition = pathRequisitions + "/req" + str(i) + ".txt"
+            # Rodar a rede
+            comando = "./build/k-server -run " + pathMap + " " + pathRequisition + " " + pathNetwork + " " + idLote
+            print(comando)
+            os.system(comando)
+    
+    def runGreedy(self, idLote):
+        #./build/k-server -greedy dados/instancias/lote1/mapa.txt dados/instancias/lote1/req-tst/req1.txt dados/saida/lote1/rede-2x2.txt 1
+        # Obter o caminho do mapa
+        pathMap = "dados/instancias/lote" + str(idLote) + "/mapa.txt"
+        # Obter o caminho das requisições de teste
+        pathRequisitions = "dados/instancias/lote" + str(idLote) + "/req-tst"
+        # Rodar o algoritmo greedy para todas as requisições de teste
+        for i in range(1, self.meta_dados["instancias"] + 1):
+            # Obter o caminho da requisição de teste
+            pathRequisition = pathRequisitions + "/req" + str(i) + ".txt"
+            # Rodar o algoritmo greedy
+            comando = "./build/k-server -greedy " + pathMap + " " + pathRequisition + " " + idLote
+            print(comando)
+            os.system(comando)

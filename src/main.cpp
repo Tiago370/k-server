@@ -9,7 +9,8 @@ int main(int argc, char *argv[]){
     }
     string algoritmo = argv[1];
     if(algoritmo == "-greedy"){
-        Greeder *greeder = new Greeder(argv[2], argv[3]);
+        string idLote = argv[4];
+        Greeder *greeder = new Greeder(argv[2], argv[3], atoi(idLote.c_str()) );
         greeder->solve();
         delete greeder;
     }
@@ -33,7 +34,8 @@ int main(int argc, char *argv[]){
     }else if(algoritmo == "-run"){
         Trainer trainer = Trainer(string(argv[2]), string(argv[3]));
         trainer.setNet(argv[4]);
-        trainer.run(); 
+        string loteId = argv[5];
+        trainer.run(atoi(loteId.c_str()));
         }else{
         cout << "Algoritmo inválido" << endl;
         return 1;

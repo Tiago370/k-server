@@ -13,7 +13,7 @@ class Trainer {
         void printRequests();
         void randomMutation(unsigned int nHiddenLayers, unsigned int nHiddenNeurons, unsigned int nPopulation, unsigned int nGenerations, unsigned int generationsWithoutImprovement, unsigned int loteId, unsigned int nInstances, unsigned int nServers);
         void random();
-        void run();
+        void run(unsigned int idLote);
         void setNet(char* file_net);
     private:
         Environment *environment;

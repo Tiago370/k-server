@@ -70,13 +70,13 @@ void Environment::reset(){
     custo_acumulado = 0;
     copy_k_local();
 }
-unsigned int Environment::getCustoAcumulado(){
+double Environment::getCustoAcumulado(){
     return custo_acumulado;
 }
 vector<unsigned int> Environment::getKLocal(){
     return k_local;
 }
-unsigned int Environment::getCusto(unsigned int node1, unsigned int node2){
+double Environment::getCusto(unsigned int node1, unsigned int node2){
     return custo[node1][node2];
 }
 unsigned int Environment::closest_server(unsigned int node){
